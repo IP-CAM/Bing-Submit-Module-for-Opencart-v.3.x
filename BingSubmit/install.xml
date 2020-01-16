@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<modification>
+    <name>BingSubmit by CakeDeliver</name>
+    <version>1.7</version>
+    <author>CakeDeliver</author>
+    <link>https://cakedeliver.com</link>
+    <code>bingsubmit</code>
+	<file path="admin/view/template/catalog/product_form.twig">        
+		<operation> 
+            <search><![CDATA[<ul class="nav nav-tabs">]]></search>
+            <add position="before"><![CDATA[
+<div style="width: 100%;text-align: right;">
+	<label class="label-control" for="input-bing">
+		<input type="checkbox" name="bing" id="input-bing" value="1" style="margin-right: 1rem;vertical-align: middle;">Post to Bing
+	</label>
+</div>
+]]></add>
+        </operation>       
+    </file>
+		<file path="admin/view/template/catalog/category_form.twig">        
+		<operation> 
+            <search><![CDATA[<ul class="nav nav-tabs">]]></search>
+            <add position="before"><![CDATA[
+<div style="width: 100%;text-align: right;">
+	<label class="label-control" for="input-bing">
+		<input type="checkbox" name="bing" id="input-bing" value="1" style="margin-right: 1rem;vertical-align: middle;">Post to Bing
+	</label>
+</div>
+]]></add>
+        </operation>       
+    </file>
+		<file path="admin/view/template/catalog/information_form.twig">        
+		<operation> 
+            <search><![CDATA[<ul class="nav nav-tabs">]]></search>
+            <add position="before"><![CDATA[
+<div style="width: 100%;text-align: right;">
+	<label class="label-control" for="input-bing">
+		<input type="checkbox" name="bing" id="input-bing" value="1" style="margin-right: 1rem;vertical-align: middle;">Post to Bing
+	</label>
+</div>
+]]></add>
+        </operation>       
+    </file>
+	
+	
+    <file path="admin/controller/catalog/product.php">
+        <operation>
+            <search><![CDATA[$this->model_catalog_product->addProduct($this->request->post);]]></search>
+            <add position="replace"><![CDATA[
+			$product_id = $this->model_catalog_product->addProduct($this->request->post);
+			
+/**Bing Submit****/
+			$this->load->model('tool/bingsubmit');
+			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
+
+					$data_array =  array(
+						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
+						  "url"        => $this->url->link('product/product', 'product_id=' . $product_id, true),
+					);
+					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
+
+			}
+/**Bing Submit****/
+
+]]></add>
+        </operation>
+        <operation>
+            <search><![CDATA[$this->model_catalog_product->editProduct($this->request->get['product_id'], $this->request->post);]]></search>
+            <add position="after"><![CDATA[
+/**Bing Submit****/
+			$this->load->model('tool/bingsubmit');
+			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
+
+					$data_array =  array(
+						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
+						  "url"        => $this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], true),
+					);
+					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
+					//print_r($response['response']['errors']);
+			}
+/**Bing Submit****/
+			]]></add>
+        </operation>
+    </file>
+    <file path="admin/controller/catalog/category.php">        
+        <operation> 
+            <search><![CDATA[$this->model_catalog_category->addCategory($this->request->post);]]></search>
+            <add position="replace"><![CDATA[
+			$category_id = $this->model_catalog_category->addCategory($this->request->post);
+			
+/**Bing Submit****/
+			$this->load->model('tool/bingsubmit');
+			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
+
+					$data_array =  array(
+						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
+						  "url"        => $this->url->link('product/category', 'path_id=' . $category_id, true),
+					);
+					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
+
+			}
+/**Bing Submit****/
+
+]]></add>
+        </operation>
+        <operation> 
+            <search><![CDATA[$this->model_catalog_category->editCategory($this->request->get['category_id'], $this->request->post);]]></search>
+            <add position="after"><![CDATA[
+			
+/**Bing Submit****/
+			$this->load->model('tool/bingsubmit');
+			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
+
+					$data_array =  array(
+						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
+						  "url"        => $this->url->link('product/category', 'path_id=' . $this->request->get['category_id'], true),
+					);
+					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
+
+			}
+/**Bing Submit****/
+
+]]></add>
+        </operation>   		
+    </file>
+    <file path="admin/controller/catalog/information.php">        
+        <operation> 
+            <search><![CDATA[$this->model_catalog_information->addInformation($this->request->post);]]></search>
+            <add position="replace"><![CDATA[
+			$information_id = $this->model_catalog_information->addInformation($this->request->post);
+			
+/**Bing Submit****/
+			$this->load->model('tool/bingsubmit');
+			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
+
+					$data_array =  array(
+						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
+						  "url"        => $this->url->link('information/information', 'information_id=' . $information_id, true),
+					);
+					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
+
+			}
+/**Bing Submit****/
+
+]]></add>
+        </operation>
+        <operation> 
+            <search><![CDATA[$this->model_catalog_information->editInformation($this->request->get['information_id'], $this->request->post);]]></search>
+            <add position="after"><![CDATA[
+			
+/**Bing Submit****/
+			$this->load->model('tool/bingsubmit');
+			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
+
+					$data_array =  array(
+						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
+						  "url"        => $this->url->link('information/information', 'information_id=' . $this->request->get['information_id'], true),
+					);
+					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
+
+			}
+/**Bing Submit****/
+
+]]></add>
+        </operation>   		
+    </file>
+     
+</modification>

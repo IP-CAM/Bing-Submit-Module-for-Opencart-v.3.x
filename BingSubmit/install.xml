@@ -52,10 +52,16 @@
 /**Bing Submit****/
 			$this->load->model('tool/bingsubmit');
 			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
-
+					$url = new Url(HTTP_CATALOG, $this->config->get('config_secure') ? HTTP_CATALOG : HTTPS_CATALOG);
+					if ($this->config->get('config_seo_url')) {
+							// Require the SEO file directly - path is relative to /admin/index.php
+							require_once('../catalog/controller/startup/seo_url.php');
+							$rewriter = new ControllerStartupSeoUrl($this->registry);
+							$url->addRewrite($rewriter);
+					}
 					$data_array =  array(
 						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
-						  "url"        => $this->url->link('product/product', 'product_id=' . $product_id, true),
+						  "url"        => $url->link('product/product', 'product_id=' . $product_id, true),
 					);
 					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
 
@@ -70,10 +76,16 @@
 /**Bing Submit****/
 			$this->load->model('tool/bingsubmit');
 			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
-
+					$url = new Url(HTTP_CATALOG, $this->config->get('config_secure') ? HTTP_CATALOG : HTTPS_CATALOG);
+					if ($this->config->get('config_seo_url')) {
+							// Require the SEO file directly - path is relative to /admin/index.php
+							require_once('../catalog/controller/startup/seo_url.php');
+							$rewriter = new ControllerStartupSeoUrl($this->registry);
+							$url->addRewrite($rewriter);
+					}
 					$data_array =  array(
 						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
-						  "url"        => $this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], true),
+						  "url"        => $url->link('product/product', 'product_id=' . $this->request->get['product_id'], true),
 					);
 					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
 					//print_r($response['response']['errors']);
@@ -91,10 +103,16 @@
 /**Bing Submit****/
 			$this->load->model('tool/bingsubmit');
 			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
-
+					$url = new Url(HTTP_CATALOG, $this->config->get('config_secure') ? HTTP_CATALOG : HTTPS_CATALOG);
+					if ($this->config->get('config_seo_url')) {
+							// Require the SEO file directly - path is relative to /admin/index.php
+							require_once('../catalog/controller/startup/seo_url.php');
+							$rewriter = new ControllerStartupSeoUrl($this->registry);
+							$url->addRewrite($rewriter);
+					}
 					$data_array =  array(
 						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
-						  "url"        => $this->url->link('product/category', 'path_id=' . $category_id, true),
+						  "url"        => $url->link('product/category', 'path_id=' . $category_id, true),
 					);
 					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
 
@@ -110,10 +128,16 @@
 /**Bing Submit****/
 			$this->load->model('tool/bingsubmit');
 			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
-
+					$url = new Url(HTTP_CATALOG, $this->config->get('config_secure') ? HTTP_CATALOG : HTTPS_CATALOG);
+					if ($this->config->get('config_seo_url')) {
+							// Require the SEO file directly - path is relative to /admin/index.php
+							require_once('../catalog/controller/startup/seo_url.php');
+							$rewriter = new ControllerStartupSeoUrl($this->registry);
+							$url->addRewrite($rewriter);
+					}
 					$data_array =  array(
 						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
-						  "url"        => $this->url->link('product/category', 'path_id=' . $this->request->get['category_id'], true),
+						  "url"        => $url->link('product/category', 'path_id=' . $this->request->get['category_id'], true),
 					);
 					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
 
@@ -132,10 +156,16 @@
 /**Bing Submit****/
 			$this->load->model('tool/bingsubmit');
 			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
-
+					$url = new Url(HTTP_CATALOG, $this->config->get('config_secure') ? HTTP_CATALOG : HTTPS_CATALOG);
+					if ($this->config->get('config_seo_url')) {
+							// Require the SEO file directly - path is relative to /admin/index.php
+							require_once('../catalog/controller/startup/seo_url.php');
+							$rewriter = new ControllerStartupSeoUrl($this->registry);
+							$url->addRewrite($rewriter);
+					}
 					$data_array =  array(
 						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
-						  "url"        => $this->url->link('information/information', 'information_id=' . $information_id, true),
+						  "url"        => $url->link('information/information', 'information_id=' . $information_id, true),
 					);
 					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
 
@@ -151,10 +181,16 @@
 /**Bing Submit****/
 			$this->load->model('tool/bingsubmit');
 			if ($this->config->get('module_bingsubmit_status') && $this->config->get('module_bingsubmit_access_key') && $this->request->post['bing']){
-
+					$url = new Url(HTTP_CATALOG, $this->config->get('config_secure') ? HTTP_CATALOG : HTTPS_CATALOG);
+					if ($this->config->get('config_seo_url')) {
+							// Require the SEO file directly - path is relative to /admin/index.php
+							require_once('../catalog/controller/startup/seo_url.php');
+							$rewriter = new ControllerStartupSeoUrl($this->registry);
+							$url->addRewrite($rewriter);
+					}
 					$data_array =  array(
 						  "siteUrl"        => ($this->request->server['HTTPS']) ? HTTPS_CATALOG : HTTP_CATALOG,
-						  "url"        => $this->url->link('information/information', 'information_id=' . $this->request->get['information_id'], true),
+						  "url"        => $url->link('information/information', 'information_id=' . $this->request->get['information_id'], true),
 					);
 					$response = $this->model_tool_bingsubmit->bingPost($this->config->get('module_bingsubmit_access_key'),json_encode($data_array));
 

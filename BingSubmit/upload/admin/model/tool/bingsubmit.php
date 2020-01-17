@@ -14,11 +14,13 @@ class ModelToolBingSubmit extends Model {
 	   // OPTIONS:
 	   curl_setopt($curl, CURLOPT_URL, $url);
 	   curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-		  //'apikey: 111111111111111111111',
 		  'Content-Type: application/json',
 	   ));
 	   curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	   curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+	   //additional options
+	   curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 10);
+	   curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 	   // EXECUTE:
 	   $result = curl_exec($curl);
 	   if(!$result){die("Connection Failure");}

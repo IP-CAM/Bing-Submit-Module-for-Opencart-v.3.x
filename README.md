@@ -1,4 +1,4 @@
-# Opencart bingSubmit
+# Opencart bing Submit
 Opencart module to allow user submit url to Bing.com webmaster when add/update product, add/update category, add/update information etc.
 
 for Bing webmaster submission API please see here: https://www.bing.com/webmaster/help/submit-urls-to-bing-62f2860a
